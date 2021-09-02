@@ -1,6 +1,6 @@
-package com.github.fabriciolfj.ecommerce;
+package com.github.fabriciolfj.ecommerce.model;
 
-import com.github.fabriciolfj.ecommerce.model.Produto;
+import com.github.fabriciolfj.ecommerce.EntityManagerTest;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -10,26 +10,12 @@ import org.junit.jupiter.api.Test;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-
 import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class IniciarUnidadeDePersistenciaTest {
-
-    private static EntityManagerFactory emf;
-    private EntityManager em;
-
-    @BeforeAll
-    public static void Init() {
-        emf = Persistence.createEntityManagerFactory("Ecommerce-PU");
-    }
-
-    @BeforeEach
-    public void setup() {
-        em = emf.createEntityManager();
-    }
+public class IniciarUnidadeDePersistenciaTest extends EntityManagerTest {
 
     @Test
     public void findProductSucess() {
@@ -46,16 +32,6 @@ public class IniciarUnidadeDePersistenciaTest {
         em.refresh(product);
 
         assertEquals("Kindle", product.getNome());
-    }
-
-    @AfterEach
-    public void close() {
-        em.close();
-    }
-
-    @AfterAll
-    public static void down() {
-        emf.close();
     }
 
 }
