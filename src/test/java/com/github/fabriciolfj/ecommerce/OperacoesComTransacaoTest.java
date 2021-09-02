@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class OperacoesComTransacaoTest extends EntityManagerTest {
 
@@ -16,6 +17,21 @@ public class OperacoesComTransacaoTest extends EntityManagerTest {
         em.getTransaction().begin();
 
         em.getTransaction().commit();
+    }
+
+    @Test
+    public void removeRegistro() {
+        final Produto produto = em.find(Produto.class, 3);
+
+        em.getTransaction().begin();
+
+        em.remove(produto);
+
+        em.getTransaction().commit();
+
+        final Produto prod = em.find(Produto.class, 3);
+
+        assertNull(prod);
     }
 
     @Test
